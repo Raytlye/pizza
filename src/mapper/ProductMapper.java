@@ -23,7 +23,6 @@ public class ProductMapper extends DatabaseMapper {
 	public ArrayList<ProductDTO> selectAll() {
 		
 		
-		//PreparedStatement preparedStatement = null;
 		String selectAllSQL = "SELECT * FROM product";
 		ArrayList<ProductDTO> list = new ArrayList<ProductDTO>();
 		
