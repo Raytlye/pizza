@@ -1,17 +1,27 @@
 package datatransferobject;
 
+import java.sql.Date;
+
 public class OrderDTO {
 	
 	private int pk;
 	private String email;
-	private String date;
+	private Date date;
 	
-	public OrderDTO(int pk, String email, String date) {
+	public OrderDTO(int pk, String email, Date date) {
 		
 		this.pk = pk;
 		this.email = email;
 		this.date = date;
 		
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public int getPk() {
@@ -28,14 +38,6 @@ public class OrderDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
 	}
 
 }
