@@ -47,45 +47,24 @@ public class PizzaDomain {
 		
 	}
 	
-	public static void main(String[] args) {
+	public OrderDTO selectOrder(int pk) {
 		
-		//Select * from products
-		ArrayList<ProductDTO> list = new PizzaDomain(new DatabaseConnection()).selectAllProducts();
+		OrderMapper mapper = new OrderMapper(connector.getConnection());
+		return mapper.select(pk);
 		
-		for(int i = 0; i < list.size(); i++) {
-			
-			System.out.print(list.get(i).getPk() + " ");
-			System.out.print(list.get(i).getName() + " ");
-			System.out.print(list.get(i).getPrice() + "\n");
-			
-		}
+	}
+	
+	public void deleteOrder(int pk) {
 		
-		//new PizzaDomain(new DatabaseConnection()).insertOrder(new OrderDTO(1, "yallah@hsr.ch", new Date(System.currentTimeMillis())));
+		OrderMapper mapper = new OrderMapper(connector.getConnection());
+		mapper.delete(pk);
 		
+	}
+	
+	public ProductDTO selectProduct(int pk) {
 		
-		//Select * from Order where date = date
-		ArrayList<OrderDTO> orderList = new PizzaDomain(new DatabaseConnection()).selectOrdersByDate(new Date(System.currentTimeMillis()));
-		
-		for(int i = 0; i < orderList.size(); i++) {
-			
-			System.out.print(orderList.get(i).getPk() + " ");
-			System.out.print(orderList.get(i).getEmail() + " ");
-			System.out.print(orderList.get(i).getDate() + "\n");
-			
-		}
-		
-		//Select * from Order where email = email
-		ArrayList<OrderDTO> orderList2 = new PizzaDomain(new DatabaseConnection()).selectOrdersByEmail("yallah@hsr.ch");
-		
-		for(int i = 0; i < orderList2.size(); i++) {
-			
-			System.out.print(orderList2.get(i).getPk() + " ");
-			System.out.print(orderList2.get(i).getEmail() + " ");
-			System.out.print(orderList2.get(i).getDate() + "\n");
-			
-		}
-		
-		
+		ProductMapper mapper = new ProductMapper(connector.getConnection());
+		return mapper.select(pk);
 		
 	}
 

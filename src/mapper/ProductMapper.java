@@ -16,6 +16,25 @@ public class ProductMapper extends DatabaseMapper {
 	
 	public ProductDTO select(int pk) {
 		
+		String selectSQL = "SELECT * from product WHERE productpk = ?";
+		
+		try(PreparedStatement ps = connection.prepareStatement(selectSQL)) {
+			
+			ps.setInt(1, pk);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				
+				ProductDTO product = new ProductDTO(rs.getInt("productpk"), rs.getString("name"), rs.getDouble("price"));
+				return product;
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 		
 	}

@@ -37,6 +37,25 @@ public class OrderMapper extends DatabaseMapper {
 	
 	public OrderDTO select(int pk) {
 		
+		String selectWhereDateSQL = "SELECT * from public.\"Order\" WHERE orderpk = ?";
+		
+		try(PreparedStatement ps = connection.prepareStatement(selectWhereDateSQL)) {
+			
+			ps.setInt(1, pk);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+			
+				OrderDTO order = new OrderDTO(rs.getInt("orderpk"), rs.getString("email"), rs.getDate("date"));
+				return order;
+			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 		
 	}
@@ -104,15 +123,12 @@ public class OrderMapper extends DatabaseMapper {
 		try(PreparedStatement ps = connection.prepareStatement(deleteSQL)) {
 			
 			ps.setInt(1, pk);
-			
 			ps.executeUpdate();
 			System.out.println("Record deleted from Order table!");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 	}
 
