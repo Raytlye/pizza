@@ -23,10 +23,13 @@ public class OrderMapper extends DatabaseMapper {
 		
 		try(PreparedStatement ps = connection.prepareStatement(insertSQL)) {
 			
+			connection.setAutoCommit(false);
 			ps.setString(1, order.getEmail());
 			ps.setDate(2, order.getDate());
 			
 			ps.executeUpdate();
+			connection.commit();
+			
 			System.out.println("Record is inserted into Order table!");
 			
 		} catch (SQLException e) {
@@ -122,8 +125,11 @@ public class OrderMapper extends DatabaseMapper {
 		
 		try(PreparedStatement ps = connection.prepareStatement(deleteSQL)) {
 			
+			connection.setAutoCommit(false);
 			ps.setInt(1, pk);
 			ps.executeUpdate();
+			connection.commit();
+			
 			System.out.println("Record deleted from Order table!");
 			
 		} catch (SQLException e) {

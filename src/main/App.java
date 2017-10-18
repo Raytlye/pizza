@@ -23,7 +23,7 @@ public static void main(String[] args) {
 			
 		}
 		
-		//new PizzaDomain(new DatabaseConnection()).insertOrder(new OrderDTO(1, "yallah@hsr.ch", new Date(System.currentTimeMillis())));
+		//new PizzaDomain(new DatabaseConnection()).insertOrder(new OrderDTO(0, "grüezi@hsr.ch", new Date(System.currentTimeMillis())));
 		
 		
 		//Select * from Order where date = date
@@ -38,7 +38,7 @@ public static void main(String[] args) {
 		}
 		
 		//Select * from Order where email = email
-		ArrayList<OrderDTO> orderList2 = new PizzaDomain(new DatabaseConnection()).selectOrdersByEmail("yallah@hsr.ch");
+		ArrayList<OrderDTO> orderList2 = new PizzaDomain(new DatabaseConnection()).selectOrdersByEmail("lvonnied@hsr.ch");
 		
 		for(int i = 0; i < orderList2.size(); i++) {
 			
@@ -49,17 +49,17 @@ public static void main(String[] args) {
 		}
 		
 		//Select * from Order where pk = pk
-		OrderDTO order = new PizzaDomain(new DatabaseConnection()).selectOrder(5);
+		OrderDTO order = new PizzaDomain(new DatabaseConnection()).selectOrder(9);
 		if(order != null) {
 		System.out.println(order.getPk() + " " + order.getEmail() + " " + order.getDate());
 		} else {
 			System.out.println("There is no object at this primary key");
 		}
 		//Delete from Order where pk = pk
-		new PizzaDomain(new DatabaseConnection()).deleteOrder(5);
+		//new PizzaDomain(new DatabaseConnection()).deleteOrder(8);
 		
 		//Select * from Order where pk = pk
-		ProductDTO product = new PizzaDomain(new DatabaseConnection()).selectProduct(1);
+		ProductDTO product = new PizzaDomain(new DatabaseConnection()).selectProduct(2);
 		if(order != null) {
 			System.out.println(product.getPk() + " " + product.getName() + " " + product.getPrice());
 			} else {
