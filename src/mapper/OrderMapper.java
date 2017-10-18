@@ -34,6 +34,11 @@ public class OrderMapper extends DatabaseMapper {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
@@ -134,6 +139,11 @@ public class OrderMapper extends DatabaseMapper {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
