@@ -27,7 +27,9 @@ public static void main(String[] args) {
 		
 		
 		//Select * from Order where date = date
-		ArrayList<OrderDTO> orderList = new PizzaDomain(new DatabaseConnection()).selectOrdersByDate(new Date(System.currentTimeMillis()));
+		String dateString = "2017-10-30";
+		Date date = Date.valueOf(dateString);
+		ArrayList<OrderDTO> orderList = new PizzaDomain(new DatabaseConnection()).selectOrdersByDate(date);
 		
 		for(int i = 0; i < orderList.size(); i++) {
 			
@@ -56,7 +58,7 @@ public static void main(String[] args) {
 			System.out.println("There is no object at this primary key");
 		}
 		//Delete from Order where pk = pk
-		//new PizzaDomain(new DatabaseConnection()).deleteOrder(8);
+		new PizzaDomain(new DatabaseConnection()).deleteOrder(6);
 		
 		//Select * from Order where pk = pk
 		ProductDTO product = new PizzaDomain(new DatabaseConnection()).selectProduct(2);

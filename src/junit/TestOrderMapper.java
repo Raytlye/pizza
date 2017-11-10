@@ -1,18 +1,23 @@
 package junit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.sql.Date;
-
+import java.text.ParseException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import connection.DatabaseConnection;
 import mapper.OrderMapper;
 
-class TestOrderMapper {
+import static org.junit.jupiter.api.Assertions.*;
 
-	OrderMapper mapper = new OrderMapper(new DatabaseConnection().getConnection());
-	Date date = new Date(2017, 10, 17);
+public class TestOrderMapper {
+	
+	OrderMapper mapper;
+	
+	@BeforeEach
+	void getConnection() throws ParseException {
+		mapper = new OrderMapper(new DatabaseConnection().getConnection());
+	}
 	
 	@Test
 	void testSelect() {
@@ -21,7 +26,10 @@ class TestOrderMapper {
 
 	@Test
 	void testSelectByDate() {
+		String dateString = "2017-10-30";
+		Date date = Date.valueOf(dateString);
 		assertNotNull(mapper.selectByDate(date), "Checking if return value of selectByDate is not null");
+		System.out.println(mapper.selectByDate(date));
 		assertFalse(mapper.selectByDate(date).isEmpty(), "check if list by date is empty");
 	}
 
