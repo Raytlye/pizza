@@ -22,7 +22,9 @@ public class PizzaDomain {
 	public ArrayList<ProductDTO> selectAllProducts(){
 		
 		ProductMapper mapper = new ProductMapper(connector.getConnection());
-		return mapper.selectAll();
+		ArrayList<ProductDTO> list = mapper.selectAll();
+		connector.closeConnection();
+		return list;
 		
 	}
 	
@@ -30,27 +32,34 @@ public class PizzaDomain {
 		
 		OrderMapper mapper = new OrderMapper(connector.getConnection());
 		mapper.insert(order);
+		connector.closeConnection();
 		
 	}
 	
 	public ArrayList<OrderDTO> selectOrdersByDate(Date date) {
 		
 		OrderMapper mapper = new OrderMapper(connector.getConnection());
-		return mapper.selectByDate(date);
+		ArrayList<OrderDTO> list = mapper.selectByDate(date);
+		connector.closeConnection();
+		return list;
 		
 	}
 	
 	public ArrayList<OrderDTO> selectOrdersByEmail(String email) {
 		
 		OrderMapper mapper = new OrderMapper(connector.getConnection());
-		return mapper.selectByEmail(email);
+		ArrayList<OrderDTO> list = mapper.selectByEmail(email);
+		connector.closeConnection();
+		return list;
 		
 	}
 	
 	public OrderDTO selectOrder(int pk) {
 		
 		OrderMapper mapper = new OrderMapper(connector.getConnection());
-		return mapper.select(pk);
+		OrderDTO order = mapper.select(pk);
+		connector.closeConnection();
+		return order;
 		
 	}
 	
@@ -58,13 +67,32 @@ public class PizzaDomain {
 		
 		OrderMapper mapper = new OrderMapper(connector.getConnection());
 		mapper.delete(pk);
+		connector.closeConnection();
 		
 	}
 	
 	public ProductDTO selectProduct(int pk) {
 		
 		ProductMapper mapper = new ProductMapper(connector.getConnection());
-		return mapper.select(pk);
+		ProductDTO product = mapper.select(pk);
+		connector.closeConnection();
+		return product;
+		
+	}
+	
+	public void insertProduct(ProductDTO product) {
+		
+		ProductMapper mapper = new ProductMapper(connector.getConnection());
+		mapper.insert(product);
+		connector.closeConnection();
+		
+	}
+	
+	public void deleteProduct(int pk) {
+		
+		ProductMapper mapper = new ProductMapper(connector.getConnection());
+		mapper.delete(pk);
+		connector.closeConnection();
 		
 	}
 

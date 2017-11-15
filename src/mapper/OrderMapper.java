@@ -29,8 +29,7 @@ public class OrderMapper extends DatabaseMapper {
 			
 			ps.executeUpdate();
 			connection.commit();
-			
-			System.out.println("Record is inserted into Order table!");
+			connection.setAutoCommit(true);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -134,8 +133,7 @@ public class OrderMapper extends DatabaseMapper {
 			ps.setInt(1, pk);
 			ps.executeUpdate();
 			connection.commit();
-			
-			System.out.println("Record deleted from Order table!");
+			connection.setAutoCommit(true);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

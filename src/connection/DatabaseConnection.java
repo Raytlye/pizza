@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 	
+	Connection connection;
 	public Connection getConnection() {
 		System.out.println("-------- PostgreSQL "
 				+ "JDBC Connection Testing ------------");
@@ -20,7 +21,7 @@ public class DatabaseConnection {
 
 		}
 
-		Connection connection = null;
+		connection = null;
 
 		try {
 
@@ -42,6 +43,17 @@ public class DatabaseConnection {
 			System.out.println("Failed to make connection!");
 		}
 		return connection;
+	}
+	
+	public void closeConnection() {
+		
+		try {
+			connection.close();
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		System.out.println("CONNECION CLOSED");
 	}
 
 }

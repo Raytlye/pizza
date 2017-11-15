@@ -23,7 +23,7 @@ public static void main(String[] args) {
 			
 		}
 		
-		//new PizzaDomain(new DatabaseConnection()).insertOrder(new OrderDTO(0, "grüezi@hsr.ch", new Date(System.currentTimeMillis())));
+		new PizzaDomain(new DatabaseConnection()).insertOrder(new OrderDTO(0, "grüezi@hsr.ch", new Date(System.currentTimeMillis())));
 		
 		
 		//Select * from Order where date = date
@@ -58,7 +58,7 @@ public static void main(String[] args) {
 			System.out.println("There is no object at this primary key");
 		}
 		//Delete from Order where pk = pk
-		new PizzaDomain(new DatabaseConnection()).deleteOrder(6);
+		//new PizzaDomain(new DatabaseConnection()).deleteOrder(6);
 		
 		//Select * from Order where pk = pk
 		ProductDTO product = new PizzaDomain(new DatabaseConnection()).selectProduct(2);

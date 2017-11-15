@@ -14,6 +14,33 @@ public class ProductMapper extends DatabaseMapper {
 		super(connection);
 	}
 	
+	public void insert(ProductDTO product) {
+		
+		String insertSQL = "INSERT INTO Product" 
+				+ "(name, price)" 
+				+ "VALUES(?, ?)";
+		
+		try(PreparedStatement ps = connection.prepareStatement(insertSQL)) {
+			
+			connection.setAutoCommit(false);
+			ps.setString(1, product.getName());
+			ps.setDouble(2, product.getPrice());
+			
+			ps.executeUpdate();
+			connection.commit();
+			connection.setAutoCommit(true);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+	}
+	
 	public ProductDTO select(int pk) {
 		
 		String selectSQL = "SELECT * from product WHERE productpk = ?";
@@ -62,6 +89,29 @@ public class ProductMapper extends DatabaseMapper {
 		}
 		
 		return null;
+		
+	}
+	
+	public void delete(int pk) {
+		
+		String deleteSQL = "DELETE FROM Product WHERE productpk = ?";
+		
+		try(PreparedStatement ps = connection.prepareStatement(deleteSQL)) {
+			
+			connection.setAutoCommit(false);
+			ps.setInt(1, pk);
+			ps.executeUpdate();
+			connection.commit();
+			connection.setAutoCommit(true);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
 		
 	}
 
